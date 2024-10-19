@@ -113,7 +113,6 @@ ranging = 'A1:F100'
 data = pull_sheet_data(SCOPES,SPREADSHEET_ID,ranging)
 df = pd.DataFrame(data)
  
- 
 if 'counter' not in st.session_state:
     st.session_state['counter']=len(df) #------------------------
 button_col1,button_col2=tab1.columns(2)
@@ -165,11 +164,11 @@ for i in range(nb):
     #button , text_input ,  selectbox , text_area , date_input , time_input
  
     TABB+=[[col_tab1[i][0].button("X",key=str(i)+"tab1button",on_click=dlrow,kwargs={"i":i}),
-        col_tab1[i][1].text_input("name",key=str(i)+"tab1name",value=df[1][i]),
-         col_tab1[i][2].selectbox("state",["--","Fini","En cours","A commencer","Pas de mon ressort"],key=str(i)+"tab1state",index=["--","Fini","En cours","A commencer","Pas de mon ressort"].index(df[2][i])),
-         col_tab1[i][3].text_area("desc",key=str(i)+"tab1desc",value=str(df[3][i])).replace("\n"," "),
-         col_tab1[i][4].date_input("Date",key=str(i)+"tab1date",value=datetime.datetime(int(df[4][i].split("-")[0]),int(df[4][i].split("-")[1]),int(df[4][i].split("-")[2]))),
-        col_tab1[i][5].time_input("Time",key=str(i)+"tab1time",value=datetime.time(int(df[5][i].split(":")[0]),int(df[5][i].split(":")[1])))]]
+        col_tab1[i][1].text_input("name",key=str(i)+"tab1name",value=df.iloc[i,1]),
+         col_tab1[i][2].selectbox("state",["--","Fini","En cours","A commencer","Pas de mon ressort"],key=str(i)+"tab1state",index=["--","Fini","En cours","A commencer","Pas de mon ressort"].index(df.iloc[i,2])),
+         col_tab1[i][3].text_area("desc",key=str(i)+"tab1desc",value=str(df.iloc[i,3])).replace("\n"," "),
+         col_tab1[i][4].date_input("Date",key=str(i)+"tab1date",value=datetime.datetime(int(df.iloc[i,4].split("-")[0]),int(df.iloc[i,4].split("-")[1]),int(df.iloc[i,4].split("-")[2]))),
+        col_tab1[i][5].time_input("Time",key=str(i)+"tab1time",value=datetime.time(int(df.iloc[i,5].split(":")[0]),int(df.iloc[i,5].split(":")[1])))]]
  
  
 saving()
